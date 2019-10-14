@@ -1,10 +1,7 @@
 public class Entity0 extends Entity
 {    
-	public final int INFINITY = 9999;
 
-	private int N;
 
-	private int adj[][];
 	// Perform any necessary initialization in the constructor
 	public Entity0()
 	{
@@ -20,10 +17,22 @@ public class Entity0 extends Entity
 		distanceTable[3][3] = 7;
 		//This creates a new array whi
 
-		
+
 		int [] minDist = new int [4];
+		int[] distanceVector = {0,1,3,7};
+
+
 		
+		for(int i = 0; i < distanceTable.length;++i) {
 		
+			if(i != 0) {
+				
+				Packet p = new Packet(0,i,distanceVector);
+				System.out.println("PackettoLayer p is equal to "+ p );
+				NetworkSimulator.toLayer2(p);
+			}
+			
+		}
 		System.out.println("Entity0 Initializion Complete. Distance Table is:");
 		printDT();
 	} 
@@ -42,31 +51,31 @@ public class Entity0 extends Entity
 
 	public void linkCostChangeHandler(int whichLink, int newCost)
 	{
-	      for(int f = 0; f < 4; f++){
-	          for(int g = 0; g < 4; g++){
-	            distanceTable[f][g] = 999;
-	          }
-	        }
-	        //we can now plug in the costs that are given in the diagram
-	        distanceTable[0][0] = 0;
-	        distanceTable[0][1] = 1;
-	        distanceTable[0][2] = 3;
-	        distanceTable[0][3] = 7;
-	        //next, we replace the value of getting to the node with the changed link with the new cost
-	        distanceTable[whichLink][whichLink] = newCost;
-	        //Once again, we initialize and calculate the minimum distance array.
-	        int[] minDistance = new int[4];
-	        for(int h = 0; h < 4; h++){
-	          int b = Math.min(distanceTable[h][2], distanceTable[h][3]);
-	          minDistance[h] = Math.min(distanceTable[h][1], b);
-	        }
-	        //finally, we send packets out to each node with the new costs.
-	        for(int i = 0; i < 3; i++){
-	          Packet dtPacket = new Packet(0, i, minDistance);
-	          NetworkSimulator.toLayer2(dtPacket);
-	        }
-	        System.out.println("Entity0 linkCostChange Handled. Distance Table is:");
-	        printDT();
+		for(int f = 0; f < 4; f++){
+			for(int g = 0; g < 4; g++){
+				distanceTable[f][g] = 999;
+			}
+		}
+		//we can now plug in the costs that are given in the diagram
+		distanceTable[0][0] = 0;
+		distanceTable[0][1] = 1;
+		distanceTable[0][2] = 3;
+		distanceTable[0][3] = 7;
+		//next, we replace the value of getting to the node with the changed link with the new cost
+		distanceTable[whichLink][whichLink] = newCost;
+		//Once again, we initialize and calculate the minimum distance array.
+		int[] minDistance = new int[4];
+		for(int h = 0; h < 4; h++){
+			int b = Math.min(distanceTable[h][2], distanceTable[h][3]);
+			minDistance[h] = Math.min(distanceTable[h][1], b);
+		}
+		//finally, we send packets out to each node with the new costs.
+		for(int i = 0; i < 3; i++){
+			Packet dtPacket = new Packet(0, i, minDistance);
+			NetworkSimulator.toLayer2(dtPacket);
+		}
+		System.out.println("Entity0 linkCostChange Handled. Distance Table is:");
+		printDT();
 	}
 
 	public void printDT()
