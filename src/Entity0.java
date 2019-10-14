@@ -45,7 +45,7 @@ public class Entity0 extends Entity
 	// details.
 
 	/*
-	 * 
+	 * need add comments 
 	 * */
 
 	public void update(Packet p)
