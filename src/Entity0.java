@@ -10,7 +10,7 @@ public class Entity0 extends Entity
 	{
 		for(int i = 0; i < 4; i++){
 			for(int j = 0; j < 4; j++){
-				distanceTable[i][j] = INFINITY;
+				distanceTable[i][j] = 999;
 			}
 		}
 
@@ -20,6 +20,10 @@ public class Entity0 extends Entity
 		distanceTable[3][3] = 7;
 		//This creates a new array whi
 
+		
+		int [] minDist = new int [4];
+		
+		
 		System.out.println("Entity0 Initializion Complete. Distance Table is:");
 		printDT();
 	} 
@@ -45,9 +49,9 @@ public class Entity0 extends Entity
 	        }
 	        //we can now plug in the costs that are given in the diagram
 	        distanceTable[0][0] = 0;
-	        distanceTable[1][1] = 1;
-	        distanceTable[2][2] = 2;
-	        distanceTable[3][3] = 7;
+	        distanceTable[0][1] = 1;
+	        distanceTable[0][2] = 3;
+	        distanceTable[0][3] = 7;
 	        //next, we replace the value of getting to the node with the changed link with the new cost
 	        distanceTable[whichLink][whichLink] = newCost;
 	        //Once again, we initialize and calculate the minimum distance array.
@@ -57,7 +61,7 @@ public class Entity0 extends Entity
 	          minDistance[h] = Math.min(distanceTable[h][1], b);
 	        }
 	        //finally, we send packets out to each node with the new costs.
-	        for(int i = 1; i < 4; i++){
+	        for(int i = 0; i < 3; i++){
 	          Packet dtPacket = new Packet(0, i, minDistance);
 	          NetworkSimulator.toLayer2(dtPacket);
 	        }
@@ -71,10 +75,10 @@ public class Entity0 extends Entity
 		System.out.println("           via");
 		System.out.println(" D0 |   1   2   3");
 		System.out.println("----+------------");
-		for (int i = 1; i < NetworkSimulator.NUMENTITIES; i++)
+		for (int i = 0; i < NetworkSimulator.NUMENTITIES; i++)
 		{
 			System.out.print("   " + i + "|");
-			for (int j = 1; j < NetworkSimulator.NUMENTITIES; j++)
+			for (int j = 0; j < NetworkSimulator.NUMENTITIES; j++)
 			{
 				if (distanceTable[i][j] < 10)
 				{    

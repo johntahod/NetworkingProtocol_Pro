@@ -22,6 +22,7 @@ public class Project
             System.out.print("Enter trace level (>= 0): [0] ");
             try
             {
+            	
                 buffer = stdIn.readLine();
             }
             catch (IOException ioe)
