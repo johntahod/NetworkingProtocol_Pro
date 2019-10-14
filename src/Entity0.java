@@ -44,6 +44,9 @@ public class Entity0 extends Entity
 	// the packet correctly.  Read the warning in NetworkSimulator.java for more
 	// details.
 
+	/*
+	 * 
+	 * */
 
 	public void update(Packet p)
 	{        
